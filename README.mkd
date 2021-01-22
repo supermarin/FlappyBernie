@@ -2,7 +2,7 @@
 
 A meme game forked off [FlappySwift](https://github.com/fullstackio/FlappySwift)
 
-![FlappySwift](http://i.imgur.com/1NLoToU.gif)
+![FlappySwift](vidgif.gif)
 
 
 # Credits
