@@ -9,7 +9,7 @@
 import SpriteKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate{
-    let verticalPipeGap = 150.0
+    let verticalPipeGap = 200.0
     
     var bird:SKSpriteNode!
     var skyColor:SKColor!
@@ -99,9 +99,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         self.run(spawnThenDelayForever)
         
         // setup our bird
-        let birdTexture1 = SKTexture(imageNamed: "bird-01")
+        let birdTexture1 = SKTexture(imageNamed: "bird")
         birdTexture1.filteringMode = .nearest
-        let birdTexture2 = SKTexture(imageNamed: "bird-02")
+        let birdTexture2 = SKTexture(imageNamed: "bird02")
         birdTexture2.filteringMode = .nearest
         
         let anim = SKAction.animate(with: [birdTexture1, birdTexture2], timePerFrame: 0.2)
@@ -109,7 +109,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         
         bird = SKSpriteNode(texture: birdTexture1)
         bird.setScale(2.0)
-        bird.position = CGPoint(x: self.frame.size.width * 0.35, y:self.frame.size.height * 0.6)
+        bird.position = CGPoint(x: 500, y:self.frame.size.height * 0.6)
         bird.run(flap)
         
         
@@ -134,7 +134,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         // Initialize label and create a label which holds the score
         score = 0
         scoreLabelNode = SKLabelNode(fontNamed:"MarkerFelt-Wide")
-        scoreLabelNode.position = CGPoint( x: self.frame.midX, y: 3 * self.frame.size.height / 4 )
+        scoreLabelNode.position = CGPoint( x: self.frame.midX, y: 3 * self.frame.size.height / 2 )
         scoreLabelNode.zPosition = 100
         scoreLabelNode.text = String(score)
         self.addChild(scoreLabelNode)
@@ -188,7 +188,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         bird.position = CGPoint(x: self.frame.size.width / 2.5, y: self.frame.midY)
         bird.physicsBody?.velocity = CGVector( dx: 0, dy: 0 )
         bird.physicsBody?.collisionBitMask = worldCategory | pipeCategory
-        bird.speed = 1.0
+        bird.speed = 1.5
         bird.zRotation = 0.0
         
         // Remove all existing pipes
@@ -202,13 +202,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         scoreLabelNode.text = String(score)
         
         // Restart animation
-        moving.speed = 1
+        moving.speed = 1.5
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if moving.speed > 0  {
             for _ in touches { // do we need all touches?
                 bird.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
-                bird.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 30))
+                bird.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 120))
             }
         } else if canRestart {
             self.resetScene()
